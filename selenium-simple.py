@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
@@ -10,8 +13,11 @@ desired_cap = {
     'browserName': "chrome",
     'version': "31",
 }
+
+sauce_labs_username = os.environ.get('SAUCELABS_USERNAME')
+sauce_labs_access_key = os.environ.get('SAUCELABS_ACCESS_KEY')
 driver = webdriver.Remote(
-   command_executor='http://YOUR_SAUCE_USERNAME:YOUR_SAUCE_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub',
+   command_executor='http://{}:{}@ondemand.saucelabs.com:80/wd/hub'.format(sauce_labs_username, sauce_labs_access_key),
    desired_capabilities=desired_cap)
  
 # This is your test logic. You can add multiple tests here.
